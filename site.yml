@@ -1,0 +1,6 @@
+- include: common.yml
+#- include: webservers.yml
+#- include: appservers.yml
+#- include: dbservers.yml
+#- include: rsyslog.yml
+#- include: apache2.yml

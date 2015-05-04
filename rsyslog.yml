@@ -1,0 +1,5 @@
+- hosts: rsyslog
+  remote_user: root
+  roles:
+    - rsyslog
+

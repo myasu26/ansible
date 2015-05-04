@@ -1,0 +1,6 @@
+---
+- name: Copy the Dotfiles from git_hub repository
+  git: repo="{{ repository }}"dotfiles dest=~/dotfiles update=no accept_hostkey=yes
+
+- name: sh shell
+  shell: sh ~/dotfiles/dotfilesLink.sh

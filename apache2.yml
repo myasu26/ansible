@@ -1,0 +1,5 @@
+- hosts: apache2
+  remote_user: root
+  roles:
+    - apache2
+

@@ -1,0 +1,11 @@
+- hosts: common
+  remote_user: root
+  roles:
+    - common
+
+#- hosts: common
+#  remote_user: oreore
+##  sudo: yes
+#  roles:
+#    - oreore
+

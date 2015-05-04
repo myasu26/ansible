@@ -1,0 +1,16 @@
+[common]
+133.242.240.246:5555 ansible_ssh_private_key_file="~/.ssh/id_rsa_github"
+#133.242.240.245:2222
+#133.242.240.247:5555
+
+[webservers]
+
+[appservers]
+
+[dbservers]
+
+[rsyslog]
+#133.242.240.246:2222
+
+[apache2]
+#133.242.240.246:2222

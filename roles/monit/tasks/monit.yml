@@ -1,0 +1,8 @@
+---
+- name: common
+  template: src=monit/ssh.conf dest=/etc/monit/conf.d/ssh.conf owner=root group=root mode=0644
+  when: target == 'common'
+
+- name: start monit
+  sudo: yes
+  action: shell /etc/init.d/monit start

@@ -1,0 +1,8 @@
+---
+- template: src=default-locale.j2 dest=/etc/default/locale owner=root group=root mode=0644
+
+- lineinfile: dest=/root/.profile line='export LANG=ja_JP.utf8'
+- lineinfile: dest=/root/.profile line='export LC_ALL=$LANG'
+
+- name: source .profile
+  action: shell . /root/.profile

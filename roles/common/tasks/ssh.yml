@@ -1,0 +1,7 @@
+---
+- template: src=ssh.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0644
+  sudo: yes
+
+- name: restart sshd
+  sudo: yes
+  shell: /etc/init.d/ssh restart

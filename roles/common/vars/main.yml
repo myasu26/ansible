@@ -1,0 +1,31 @@
+---
+# defaults file for ansible-role-ja_jp
+ja_jp_apt_debian_uri: "http://ftp.jp.debian.org/debian"
+ja_jp_apt_debian_security_uri: "http://security.debian.org/"
+ja_jp_apt_debian_components:
+- main
+- non-free
+- contrib
+ja_jp_default_locale: "ja_JP.utf8"
+ja_jp_timezone: "Asia/Tokyo"
+ja_jp_install_packages:
+- lv
+- nkf
+- procps
+- lsof
+  #- w3m
+- vim-gnome
+- locales
+- locate
+- tree
+- less
+- sudo
+- zsh
+ja_jp_enable_backports: no
+ja_jp_enable_debian_lts: no
+user: "oreore"
+key_name: "myasu26"
+password: "saMQIpWt2VVYU"
+item: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC58iLo0Rkb+3KlPYPVez7XPcnxL9T0c8mj2ZWM4luIOXidH+QekrcZr891Jua7IpbqY0FyfhoP/RcvpQBvD1k+TJvss93rhNp2yahE28wJPEVJjHRMo4SBOhvTLGpfHLMOFeGPk63Jhqtk+/kWqgGB62YpK+0mtiRbA5/82T5m+9eIMmgB3ElBjms7k/1JwphFuQm/wORDn8uy0SuYLL1vKjWh9YgTUyBjGjChMOg+6Gh0tUBRK9BgH9f6udNBjv2fPHSdIzMRAEcgPLAkaKObOjKqSn5E/yJGKfjlJWk4MMIp89ZDR1td6Rpr3nj5jhsYwaGr6OdMhSdsHOYVG0dL root@3930050727e2"
+
+shell: /usr/bin/zsh

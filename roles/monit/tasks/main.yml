@@ -1,0 +1,2 @@
+- include: monit.yml
+- apt: name=monit state=installed
