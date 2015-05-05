@@ -1,1 +1,2 @@
-- include: oreore.yml
+#- include: oreore.yml
+- include: peco.yml
