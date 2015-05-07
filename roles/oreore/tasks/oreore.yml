@@ -1,6 +1,13 @@
 ---
+- name: apt build-essential need vim neobundle
+  sudo: yes
+  apt: name=build-essential
+
 - name: Copy the Dotfiles from git_hub repository
   git: repo="{{ repository }}"dotfiles dest=~/dotfiles update=no accept_hostkey=yes
 
+- name: install tpm
+  git: repo=https://github.com/tmux-plugins/tpm dest=~/.tmux/plugins/tpm update=no accept_hostkey=yes
+
 - name: sh shell
-  shell: sh ~/dotfiles/dotfilesLink.sh
+  command: sh ~/dotfiles/dotfilesLink.sh

@@ -1,3 +1,6 @@
+- name: make dir tep
+  file: path=~/tmp state=directory mode=0775
+
 - name: Get latest peco version
   shell: >
     curl -sI https://github.com/peco/peco/releases/latest | awk -F'/' '/^Location:/{print $NF}'

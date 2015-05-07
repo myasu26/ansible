@@ -4,13 +4,13 @@
     - name: add a sudo user
       lineinfile: "dest=/etc/sudoers backup=yes state=present regexp='^oreore' line='oreore ALL=(ALL) NOPASSWD: ALL'"
 
-#    - name: dowanload pubkey from Github and placed as authorized_keys
-#      get_url: url=https://github.com/"{{ key_name }}".keys dest=~/tmp/"{{ key_name }}".authorized_keys
+    - name: dowanload pubkey from Github and placed as authorized_keys
+      authorized_key: user="{{ user }}" key=https://github.com/"{{ key_name }}".keys
+#      get_url: url=https://github.com/"{{ user }}".keys dest=/home/"{{ user }}"/.ssh/.authorized_keys
 #      delegate_to: 127.0.0.1
-    - name: Create authorized_keys from the file that just downloaded
-      authorized_key: user="{{ user }}" key="{{ lookup('file', '~/.ssh/id_rsa_github.pub') }}"
 
-    - name: Change defalt shell
-      user: name="{{ user }}" shell="{{ shell }}"
-      tags: default-shell
+
+#    - name: Change defalt shell
+#      user: name="{{ user }}" shell="{{ shell }}"
+#      tags: default-shell
 

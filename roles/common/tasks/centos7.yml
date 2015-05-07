@@ -1,0 +1,27 @@
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - sudo
+    - passwd
+    - mlocate
+    - mod_ssl
+    - openssl
+    - openssl-devel
+    - httpd
+
+- name: LC
+  command: localedef -f UTF-8 -i ja_JP /usr/lib/locale/ja_JP.utf8
+
+- name: locale
+  command: localectl set-locale LANG=ja_JP.utf8
+
+- name: timezone tokyo
+  command: timedatectl set-timezone Asia/Tokyo
+
+- name: keymap
+  command: localectl set-keymap jp106
+
+#- name: modified .ssh dir
+#  file: path=/root/.ssh owner=root mode=600
+#- name: modified authorized_key
+#  file: path=/root/.ssh/authorized_keys owner=root mode=400
