@@ -1,0 +1,18 @@
+vars:
+  porgver: "0.8"
+
+tasks:
+  - name: download porg
+    get_url: url=http://downloads.sourceforge.net/project/porg/porg-"{{ porgver }}".tar.gz dest=~/tmp/porg-"{{ porgver }}".tar.gz
+
+  - name: Extract porg
+    command: tar xzvf ~/tmp/porg-"{{ porgver }}".tar.gz -C ~/tmp/
+
+  - name: configure 
+    command: ./configure --disable-grop
+
+  - name: make
+    command: sudo make install
+ 
+  - name: self logme
+    command: sudo make logme
