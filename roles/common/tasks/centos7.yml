@@ -8,6 +8,7 @@
     - openssl
     - openssl-devel
     - httpd
+    - firewalld
 
 - name: LC
   command: localedef -f UTF-8 -i ja_JP /usr/lib/locale/ja_JP.utf8
