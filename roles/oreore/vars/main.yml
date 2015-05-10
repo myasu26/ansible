@@ -1,1 +1,8 @@
 repository: "https://github.com/myasu26/"
+porgver: "0.8"
+httpd_version: 2.4.12
+httpd_package_name: httpd-{{ httpd_version }}
+httpd_source_url: http://ftp.kddilabs.jp/infosystems/apache//httpd/{{ httpd_package_name }}.tar.gz
+install_dir: /usr/local
+work_dir: /usr/local/src
+base_dir: /var/tmp/apache-build-setup }} }}

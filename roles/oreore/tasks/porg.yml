@@ -1,18 +1,27 @@
-vars:
-  porgver: "0.8"
+- name: dependency package install.
+  yum: name={{ item.package_name }} state=latest
+  with_items:
+    - { package_name: gcc }
+    - { package_name: gcc-c++ }
+    - { package_name: expat-devel }
+    - { package_name: tar }
 
-tasks:
-  - name: download porg
-    get_url: url=http://downloads.sourceforge.net/project/porg/porg-"{{ porgver }}".tar.gz dest=~/tmp/porg-"{{ porgver }}".tar.gz
+- name: download porg
+  get_url: url=http://downloads.sourceforge.net/project/porg/porg-{{ porgver }}.tar.gz dest={{ work_dir }}
 
-  - name: Extract porg
-    command: tar xzvf ~/tmp/porg-"{{ porgver }}".tar.gz -C ~/tmp/
+- name: Extract porg
+  command: tar xzvf {{ work_dir }}/porg-{{ porgver }}.tar.gz -C {{ work_dir }}
 
-  - name: configure 
-    command: ./configure --disable-grop
+- name: configure 
+  command: chdir={{ work_dir }}/porg-{{ porgver }} ./configure --disable-grop
 
-  - name: make
-    command: sudo make install
- 
-  - name: self logme
-    command: sudo make logme
+- name: compile
+  command: chdir={{ work_dir }}/porg-{{ porgver }} make
+
+- name: install
+  command: chdir={{ work_dir }}/porg-{{ porgver }} make install
+
+- name: logme
+#  command: chdir={{ work_dir }}/porg-{{ porgver }} make logme 
+  command: cd {{ work_dir }}/porg-{{ porgver }} && make logme 
+         

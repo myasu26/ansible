@@ -1,0 +1,47 @@
+  vars:
+    httpd_version: 2.4.12
+    httpd_package_name: httpd-{{ httpd_version }}
+    httpd_source_url: http://ftp.kddilabs.jp/infosystems/apache//httpd/{{ httpd_package_name }}.tar.gz
+    httpd_install_dir: /usr/local
+    httpd_work_dir: /usr/local/src
+
+  #tasks:
+
+    - name: httpd source download.
+      get_url: url={{ httpd_source_url }} dest={{ httpd_work_dir }}
+
+    - name: httpd archive unpackage.
+      unarchive: src={{ httpd_work_dir }}/{{ httpd_package_name }}.tar.gz dest={{ httpd_work_dir }}
+
+    - name: httpd configured.
+      command: chdir={{ httpd_work_dir }}/{{ httpd_package_name }} ./configure --prefix={{ httpd_install_dir }}/{{ httpd_package_name }} --enable-so
+
+    - name: httpd compile.
+      command: chdir={{ httpd_work_dir }}/{{ httpd_package_name }} make
+
+    - name: httpd installed.
+      command: chdir={{ httpd_work_dir }}/{{ httpd_package_name }} make install
+
+    - name: httpd serverroot symlinks set.
+      file: src={{ httpd_install_dir }}/{{ httpd_package_name }} dest={{ httpd_install_dir }}/apache2 state=link
+
+    - name: make apache group.
+      group: name=apache gid=48 system=yes
+
+    - name: make apache user.
+      user: name=apache uid=48 group=apache home={{ httpd_install_dir }}/apache2 shell=/sbin/nologin system=yes
+
+    - name: register of init script.
+      copy: >
+        src={{ ansible_base_dir }}/templates/httpd.init-script
+        dest=/etc/init.d/httpd
+        mode=0755
+
+    - name: httpd service of startup register.
+      service: name=httpd enabled=yes
+
+    - name: httpd log rotate.
+      copy: >
+        src={{ ansible_base_dir }}/templates/httpd.logrotate
+        dest=/etc/logrotate.d/httpd
+        mode=0644
