@@ -7,7 +7,6 @@
     - mod_ssl
     - openssl
     - openssl-devel
-    - httpd
     - firewalld
 
 - name: LC

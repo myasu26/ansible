@@ -1,5 +1,5 @@
 - hosts: common
   remote_user: oreore
-##  sudo: yes
+  sudo: yes
   roles:
     - oreore
