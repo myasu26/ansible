@@ -1,0 +1,7 @@
+- file: path=/etc/pki/tls/RCA state=directory
+# - name: openssl.cnf for RCA
+- command: cp -p /etc/pki/tls/openssl.cnf /etc/pki/tls/openssl_rca.cnf
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='^dir' line='dir             = /usr/local/ssl/RCA'
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='/etc/pki/CA' line='dir             = /usr/local/ssl/RCA'
+# - lineinfile: dest=/etc/hosts regexp='^dir' line='dir             = /usr/local/ssl/RCA'
+- lineinfile: dest=/etc/pki/tls/openssl_rca.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'

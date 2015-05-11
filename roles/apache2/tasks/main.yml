@@ -1,5 +1,7 @@
 ---
-- include: php.yml tags=service
-  when: apache2_base_php_enabled == True
-- include: apache2.yml tags=service
-- include: monitoring.yml tags=monitoring
+#- include: build-apache.yml
+- include: ssl.yml
+#- include: php.yml tags=service
+#  when: apache2_base_php_enabled == True
+#- include: apache2.yml tags=service
+#- include: monitoring.yml tags=monitoring

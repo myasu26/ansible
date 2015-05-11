@@ -1,5 +1,6 @@
-- hosts: apache2
-  remote_user: root
+- hosts: common
+  remote_user: oreore
+  sudo: yes
   roles:
     - apache2
 

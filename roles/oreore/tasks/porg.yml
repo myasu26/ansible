@@ -6,21 +6,21 @@
     - { package_name: expat-devel }
     - { package_name: tar }
 
-#- name: download porg
-#  get_url: url=http://downloads.sourceforge.net/project/porg/porg-{{ porgver }}.tar.gz dest={{ work_dir }}
-#
-#- name: Extract porg
-#  command: tar xzvf {{ work_dir }}/porg-{{ porgver }}.tar.gz -C {{ work_dir }}
-#
-#- name: configure 
-#  command: chdir={{ work_dir }}/porg-{{ porgver }} ./configure --disable-grop
-#
-#- name: compile
-#  command: chdir={{ work_dir }}/porg-{{ porgver }} make
-#
-#- name: install
-#  command: chdir={{ work_dir }}/porg-{{ porgver }} make install
-#
-#- name: logme
-##  command: chdir={{ work_dir }}/porg-{{ porgver }} make logme 
-#  command: cd {{ work_dir }}/porg-{{ porgver }} && make logme 
+- name: download porg
+  get_url: url=http://downloads.sourceforge.net/project/porg/porg-{{ porgver }}.tar.gz dest={{ work_dir }}
+
+- name: Extract porg
+  command: tar xzvf {{ work_dir }}/porg-{{ porgver }}.tar.gz -C {{ work_dir }}
+
+- name: configure 
+  command: chdir={{ work_dir }}/porg-{{ porgver }} ./configure --disable-grop
+
+- name: compile
+  command: chdir={{ work_dir }}/porg-{{ porgver }} make
+
+- name: install
+  command: chdir={{ work_dir }}/porg-{{ porgver }} make install
+
+- name: logme
+#  command: chdir={{ work_dir }}/porg-{{ porgver }} make logme 
+  command: cd {{ work_dir }}/porg-{{ porgver }} && make logme 
