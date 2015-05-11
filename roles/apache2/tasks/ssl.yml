@@ -1,7 +1,8 @@
 - file: path=/etc/pki/tls/RCA state=directory
 # - name: openssl.cnf for RCA
 - command: cp -p /etc/pki/tls/openssl.cnf /etc/pki/tls/openssl_rca.cnf
-- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='^dir' line='dir             = /usr/local/ssl/RCA'
-- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='/etc/pki/CA' line='dir             = /usr/local/ssl/RCA'
-# - lineinfile: dest=/etc/hosts regexp='^dir' line='dir             = /usr/local/ssl/RCA'
-- lineinfile: dest=/etc/pki/tls/openssl_rca.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='^dir' line='dir             = {{ ssl_dir }}/RCA'
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='/etc/pki/CA' line='dir             = {{ ssl_dir }}/RCA'
+- lineinfile: dest=/etc/pki/tls/openssl_rca.cnf state=present line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- command: chdir={{ ssl_dir }}/misc/ cp CA RCA
+- lineinfile: dest={{ ssl_dir }}/misc/RCA state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/RCA\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_rca.cnf"'

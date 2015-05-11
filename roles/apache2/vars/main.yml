@@ -9,3 +9,4 @@ install_dir: /usr/local
 work_dir: /usr/local/src
 base_dir: /var/tmp/apache-build-setup
 ssl_dir: /etc/pki/tls
+SSLEAY_CONFIG: SSLEAY_CONFIG="-config /usr/local/ssl
