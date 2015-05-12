@@ -1,0 +1,21 @@
+- file: path=/etc/pki/tls/RCA state=directory
+- command: cp -p /etc/pki/tls/openssl.cnf /etc/pki/tls/openssl_rca.cnf
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='^dir' line='dir             = {{ ssl_dir }}/RCA'
+- lineinfile: dest={{ ssl_dir }}/openssl_rca.cnf  regexp='/etc/pki/CA' line='dir             = {{ ssl_dir }}/RCA'
+- lineinfile: dest=/etc/pki/tls/openssl_rca.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- command: chdir={{ ssl_dir }}/misc cp CA RCA
+- lineinfile: dest={{ ssl_dir }}/misc/RCA state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/RCA\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_rca.cnf"'
+- file: path=/etc/pki/tls/ICA state=directory
+- command: cp -p /etc/pki/tls/openssl_rca.cnf /etc/pki/tls/openssl_ica.cnf
+- lineinfile: dest={{ ssl_dir }}/openssl_ica.cnf  regexp='^dir' line='dir             = {{ ssl_dir }}/ICA'
+- lineinfile: dest={{ ssl_dir }}/openssl_ica.cnf  regexp='{{ ssl_dir }}/RCA ' line='dir             = {{ ssl_dir }}/ICA'
+- lineinfile: dest=/etc/pki/tls/openssl_ica.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- command: chdir={{ ssl_dir }}/misc cp CA ICA
+- lineinfile: dest={{ ssl_dir }}/misc/ICA state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/ICA\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_ica.cnf"'
+- file: path=/etc/pki/tls/ICA2 state=directory
+- command: cp -p /etc/pki/tls/openssl_rca.cnf /etc/pki/tls/openssl_ica2.cnf
+- lineinfile: dest={{ ssl_dir }}/openssl_ica2.cnf  regexp='^dir' line='dir             = {{ ssl_dir }}/ICA2'
+- lineinfile: dest={{ ssl_dir }}/openssl_ica2.cnf  regexp='{{ ssl_dir }}/RCA ' line='dir             = {{ ssl_dir }}/ICA2'
+- lineinfile: dest=/etc/pki/tls/openssl_ica2.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- command: chdir={{ ssl_dir }}/misc cp CA ICA2
+- lineinfile: dest={{ ssl_dir }}/misc/ICA2 state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/ICA2\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_ica2.cnf"'

@@ -1,0 +1,5 @@
+- hosts: common
+  remote_user: oreore
+  sudo: yes
+  roles:
+    - build-apache

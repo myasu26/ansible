@@ -1,6 +1,6 @@
-#- include: common.yml
-#- include: oreore.yml
-- include: apache2.yml
+- include: common.yml
+- include: oreore.yml
+- include: build-apache.yml
 #- include: webservers.yml
 #- include: appservers.yml
 #- include: dbservers.yml
