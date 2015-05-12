@@ -1,13 +1,5 @@
 ---
-cent7_install_packages:
- - passwd
- - sudo
- - locate
- - mod_ssl
- - openssl
- - openssl-devel
- - httpd
-        -
+#
 # defaults file for ansible-role-ja_jp
 ja_jp_apt_debian_uri: "http://ftp.jp.debian.org/debian"
 ja_jp_apt_debian_security_uri: "http://security.debian.org/"

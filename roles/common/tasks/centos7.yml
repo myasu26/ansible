@@ -4,7 +4,7 @@
     - sudo
     - passwd
     - mlocate
-    - mod_ssl
+#    - mod_ssl
     - openssl
     - openssl-devel
     - firewalld
