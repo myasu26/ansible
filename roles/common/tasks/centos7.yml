@@ -21,26 +21,23 @@
 - name: keymap
   command: localectl set-keymap jp106
 
-- name: modified access.conf
-  lineinfile: >-
-    dest=/etc/security/access.conf
-    state=present
-    regexp="-:ALL EXCEPT wheel {{ user }}"
-    line='-:ALL EXCEPT wheel {{ user }}:ALL'
-
-- name: modified pam.d sshd
-  lineinfile: >-
-    dest=/etc/pam.d/sshd
-    state=present
-    backrefs=yes
-    regexp="{{ item.regexp }}"
-    line="{{ item.line }}"
-  with_items:
-    - regexp: 'nologin'
-      line: '#account    required     pam_nologin.so'
-
-- name: add pam_access.so
-  lineinfile: dest=/etc/pam.d/sshd state=present regexp="pam_access.so" line='account    required     /usr/lib64/security/pam_access.so'
-
-- name: restart sshd
-  service: name=sshd state=restarted
+#- name: modified access.conf
+#  lineinfile: >-
+#    dest=/etc/security/access.conf
+#    state=present
+#    regexp="-:ALL EXCEPT wheel {{ user }}"
+#    line='-:ALL EXCEPT wheel {{ user }}:ALL'
+#
+#- name: modified pam.d sshd
+#  lineinfile: >-
+#    dest=/etc/pam.d/sshd
+#    state=present
+#    backrefs=yes
+#    regexp="{{ item.regexp }}"
+#    line="{{ item.line }}"
+#  with_items:
+#    - regexp: 'nologin'
+#      line: '#account    required     pam_nologin.so'
+#
+#- name: add pam_access.so
+#  lineinfile: dest=/etc/pam.d/sshd state=present regexp="pam_access.so" line='account    required     /usr/lib64/security/pam_access.so'

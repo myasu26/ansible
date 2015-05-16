@@ -8,7 +8,20 @@
       authorized_key: user="{{ user }}" key=https://github.com/"{{ key_name }}".keys
 #      get_url: url=https://github.com/"{{ user }}".keys dest=/home/"{{ user }}"/.ssh/.authorized_keys
 #      delegate_to: 127.0.0.1
-
+    - name: PermitRootLogin
+#     lineinfile: "dest=/etc/ssh/sshd_config state=present regexp='^#PermitRootLogin without-password' line='PermitRootLogin no'"
+      lineinfile: dest=/etc/ssh/sshd_config
+                  backup=yes
+                  regexp="{{item.regexp}}"
+                  insertafter="{{item.insertafter}}"
+                  line="{{item.line}}"
+      with_items:
+              - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no', insertafter: '#PermitRootLogin without-password'}
+    - name: nologin
+      command: mv /run/nologin /run/nologin.bak
+    - name: restart sshd
+#      command: systemctl restart sshd
+      service: name=sshd state=restarted
 
 #    - name: Change defalt shell
 #      user: name="{{ user }}" shell="{{ shell }}"
