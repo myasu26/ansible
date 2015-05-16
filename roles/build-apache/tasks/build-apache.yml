@@ -58,11 +58,23 @@
 #- name: httpd serverroot symlinks set.
 #  file: src={{ install_dir }}/{{ httpd_package_name }} dest={{ install_dir }}/apache2 state=link
 #
-#- name: make apache group.
-#  group: name=apache gid=48 system=yes
+- name: modified httpd.conf LoadModule include ssl.conf
+  lineinfile: dest={{ install_dir }}/apache2/conf/httpd.conf
+              backup=yes
+              regexp="{{item.regexp}}"
+              insertafter="{{item.insertafter}}"
+              line="{{item.line}}"
+  with_items:
+          - { regexp: '#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so', line: 'LoadModule socache_shmcb_module modules/mod_socache_shmcb.so', insertafter: '#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so'}
+          - { regexp: '#LoadModule slotmem_shm_module modules/mod_slotmem_shm.so', line: 'LoadModule slotmem_shm_module modules/mod_slotmem_shm.so', insertafter: '#LoadModule slotmem_shm_module modules/mod_slotmem_shm.so' }
+          - { regexp: '#LoadModule ssl_module modules/mod_ssl.so', line: 'LoadModule ssl_module modules/mod_ssl.so', insertafter: '#LoadModule ssl_module modules/mod_ssl.so' }
+          - { regexp: '#Include conf/extra/httpd-ssl.conf', line: 'Include conf/extra/httpd-ssl.conf', insertafter: '#Include conf/extra/httpd-ssl.conf' }
+
+- name: make apache group.
+  group: name=apache gid=48 system=yes
 #
-#- name: make apache user.
-#  user: name=apache uid=48 group=apache home={{ install_dir }}/apache2 shell=/sbin/nologin system=yes
+- name: make apache user.
+  user: name=apache uid=48 group=apache home={{ install_dir }}/apache2 shell=/sbin/nologin system=yes
 
 #- name: register of init script.
 #  copy: >
