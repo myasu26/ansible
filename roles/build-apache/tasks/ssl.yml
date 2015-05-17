@@ -19,3 +19,10 @@
 - lineinfile: dest=/etc/pki/tls/openssl_ica2.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
 - command: chdir={{ ssl_dir }}/misc cp CA ICA2
 - lineinfile: dest={{ ssl_dir }}/misc/ICA2 state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/ICA2\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_ica2.cnf"'
+- file: path=/etc/pki/tls/ICA3 state=directory
+- command: cp -p /etc/pki/tls/openssl_rca.cnf /etc/pki/tls/openssl_ica3.cnf
+- lineinfile: dest={{ ssl_dir }}/openssl_ica3.cnf  regexp='^dir' line='dir             = {{ ssl_dir }}/ICA3'
+- lineinfile: dest={{ ssl_dir }}/openssl_ica3.cnf  regexp='{{ ssl_dir }}/RCA ' line='dir             = {{ ssl_dir }}/ICA3'
+- lineinfile: dest=/etc/pki/tls/openssl_ica3.cnf line='nsCertType = sslCA, emailCA\nnsCertType                    = server'
+- command: chdir={{ ssl_dir }}/misc cp CA ICA3
+- lineinfile: dest={{ ssl_dir }}/misc/ICA2 state=present insertafter='/bin/sh' line='CATOP={{ ssl_dir }}/ICA2\nSSLEAY_CONFIG="-config {{ ssl_dir }}/openssl_ica2.cnf"'
